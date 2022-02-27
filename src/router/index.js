@@ -47,24 +47,62 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '首页', icon: 'dashboard' }
+      }
+    ]
   },
 
+  // 管理商品路由  一级路由必须要有icon
+
+  {
+    path: '/product',
+    component: Layout,
+    meta: { title: '商品管理', icon: 'el-icon-s-shop' },
+    name: 'Product',
+    redirect: '/product/trademark/List',
+    children: [
+      {
+        path: '/trademark/List',
+        name: 'Trademark',
+        component: () => import('@/views/product/trademark/List.vue'),
+        meta: { title: '品牌管理' }
+      },
+      {
+        path: '/attr/List',
+        name: 'Attr',
+        component: () => import('@/views/product/attr/List.vue'),
+        meta: { title: '属性管理' }
+      },
+      {
+        path: '/spu/List',
+        name: 'Spu',
+        component: () => import('@/views/product/spu/List.vue'),
+        meta: { title: 'spu管理' }
+      },
+      {
+        path: '/sku/List',
+        name: 'Sku',
+        component: () => import('@/views/product/sku/List.vue'),
+        meta: { title: 'sku管理' }
+      }
+    ]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new Router({
+    // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
+  })
 
 const router = createRouter()
 
