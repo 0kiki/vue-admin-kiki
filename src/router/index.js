@@ -43,6 +43,11 @@ export const constantRoutes = [
     hidden: true
   },
 
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
+]
+
+export const asyncRoutes = [
   {
     path: '/',
     component: Layout,
@@ -54,16 +59,103 @@ export const constantRoutes = [
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
+  {
+    path: '/layout',
+    component: Layout,
+    children: [{
+      path: '/layout',
+      name: 'Layout',
+      component: () => import('@/views/Layout/index'),
+      meta: { title: 'Layout' }
+    }]
+  },
+  {
+    path: '/button',
+    component: Layout,
+    children: [{
+      path: '/button',
+      name: 'Button',
+      component: () => import('@/views/button/index'),
+      meta: { title: 'button' }
+    }]
+  },
+  {
+    path: '/upload',
+    component: Layout,
+    children: [{
+      path: '/upload',
+      name: 'Upload',
+      component: () => import('@/views/upload/index'),
+      meta: { title: 'upload' }
+    }]
+  },
+  {
+    path: '/radio',
+    component: Layout,
+    children: [{
+      path: '/radio',
+      name: 'radio',
+      component: () => import('@/views/radio/index'),
+      meta: { title: 'radio' }
+    }]
+  },
+  {
+    path: '/checkbox',
+    component: Layout,
+    children: [{
+      path: '/checkbox',
+      name: 'Checkbox',
+      component: () => import('@/views/checkbox/index'),
+      meta: { title: 'checkbox' }
+    }]
+  },
+  {
+    path: '/input',
+    component: Layout,
+    children: [{
+      path: '/input',
+      name: 'Input',
+      component: () => import('@/views/input/index'),
+      meta: { title: 'input' }
+    }]
+  },
+  {
+    path: '/select',
+    component: Layout,
+    children: [{
+      path: '/select',
+      name: 'Select',
+      component: () => import('@/views/select/index'),
+      meta: { title: 'select' }
+    }]
+  },
+  {
+    path: '/cascader',
+    component: Layout,
+    children: [{
+      path: '/cascader',
+      name: 'Cascader',
+      component: () => import('@/views/cascader/index'),
+      meta: { title: 'cascader' }
+    }]
+  },
+  {
+    path: '/form',
+    component: Layout,
+    children: [{
+      path: '/form',
+      name: 'Form',
+      component: () => import('@/views/form/index'),
+      meta: { title: 'form' }
+    }]
+  }
 
-
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
+  routes: [...constantRoutes, ...asyncRoutes]
 })
 
 const router = createRouter()

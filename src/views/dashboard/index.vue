@@ -1,6 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
+    <el-button type="warning" round @click="buttonClick">警告按钮</el-button>
   </div>
 </template>
 
@@ -13,6 +14,17 @@ export default {
     ...mapGetters([
       'name'
     ])
+  },
+  methods: {
+    buttonClick() {
+      // this.$router.push({ path: '/layout' })
+      this.$router.push(
+        {
+          path: '/layout',
+          query: { plan: 'private' }
+        }
+      )
+    }
   }
 }
 </script>
